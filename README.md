@@ -22,6 +22,7 @@ Place your exported Postman environment variables and collections JSON files in 
 ### Dependencies
 The following Python libraries are required for this script:
 - `requests`: Used for making HTTP requests.
+- `json`: Used for handling JSON files.
 
 ### How It Works
 1. Run the script using Python.
