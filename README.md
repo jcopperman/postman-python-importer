@@ -16,10 +16,6 @@ Before using this script, ensure that you have the following prerequisites insta
 - Python 3.x
 - Pip (Python package manager)
 
-### Installation
-
-1. Clone the repository or download the script to your local machine:
-
 ### Where to Place Postman Files
 Place your exported Postman environment variables and collections JSON files in the same directory as the Python script (postman_converter.py). Ensure that the JSON files have appropriate names, and be ready to provide their names when prompted by the script.
 
