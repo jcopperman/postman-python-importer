@@ -29,7 +29,7 @@ The following Python libraries are required for this script:
 2. The script will prompt you to import Postman environment variables and collections.
 3. Enter the names of the JSON files for the environment variables and collections.
 4. The script will generate Python scripts for each request in the collection, substituting environment variables as necessary.
-5. Python scripts for making HTTP requests will be saved as request_{index}.py files in the project directory.
+5. Python scripts for making HTTP requests will be saved as request_{index}.py files in a ```requests``` directory.
 
 ### Example
 Suppose you have a Postman collection with multiple requests and an environment with variables for the API base URL, authentication tokens, etc. You can use this script to convert the collection into Python scripts for automated testing or API automation.

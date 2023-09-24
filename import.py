@@ -1,5 +1,10 @@
+import os
 import json
 import requests
+
+# Create a folder for storing the generated Python scripts
+if not os.path.exists("requests"):
+    os.makedirs("requests")
 
 # Load the Postman environment JSON
 def load_environment_variables():
@@ -64,8 +69,8 @@ print(response.status_code)
 print(response.text)
 """
 
-    # Save the Python script to a file
-    with open(f'request_{index}.py', 'w') as script_file:
+    # Save the Python script to a file in the "requests" folder
+    with open(f'requests/request_{index}.py', 'w') as script_file:
         script_file.write(script)
 
 # Main function
@@ -78,7 +83,7 @@ def main():
         for index, request in enumerate(collection_data['item'], start=1):
             process_request(request['request'], environment_variables, index)
 
-        print("Requests processed and Python scripts generated.")
+        print("Requests processed and Python scripts generated in the 'requests' folder.")
 
 if __name__ == "__main__":
     main()
