@@ -7,6 +7,7 @@ A Python script that converts Postman collections into Python scripts for making
 This Python script allows you to import Postman environment variables and collections in JSON format and convert them into Python scripts. It automates the process of creating Python scripts for making HTTP requests, including handling environment variables and request parameters.
 
 ## Usage
+Run ```python import.py```
 
 ### Prerequisites
 
