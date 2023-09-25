@@ -35,30 +35,27 @@ def load_postman_collection():
 
 # Process a request and generate Python script
 def process_request(request_info, environment_variables, index):
-    url = request_info['url']
-    method = request_info['method']
-    headers = request_info.get('header', {})
-    body = request_info.get('body', {})
-    
-    # Convert dictionaries to strings
-    url = str(url)
-    method = str(method)
-    headers = json.dumps(headers, indent=4)
-    body = json.dumps(body, indent=4)
-    
-    # Substitute environment variables
+    request = request_info['request']
+    url_data = request['url']
+    method = request['method']
+    headers = request.get('header', {})
+    body = request.get('body', {})
+    request_name = request_info['name']  # Extract request name
+
+    # Extract the raw URL from the URL data
+    raw_url = url_data.get('raw', '')
+
+    # Substitute environment variables in the URL
     for variable in environment_variables:
         variable_name = variable['key']
         variable_value = variable['value']
-        url = url.replace('{{' + variable_name + '}}', variable_value)
-        headers = headers.replace('{{' + variable_name + '}}', variable_value)
-        body = body.replace('{{' + variable_name + '}}', variable_value)
+        raw_url = raw_url.replace('{{' + variable_name + '}}', variable_value)
 
     # Create a Python script
     script = f"""
 import requests
 
-url = "{url}"
+url = "{raw_url}"
 method = "{method}"
 headers = {headers}
 body = {body}
@@ -69,8 +66,8 @@ print(response.status_code)
 print(response.text)
 """
 
-    # Save the Python script to a file in the "requests" folder
-    with open(f'requests/request_{index}.py', 'w') as script_file:
+    # Save the Python script to a file with the request name-based name in the "requests" folder
+    with open(f'requests/{request_name}.py', 'w') as script_file:
         script_file.write(script)
 
 # Main function
@@ -81,7 +78,7 @@ def main():
     if collection_data:
         # Process each request in the collection
         for index, request in enumerate(collection_data['item'], start=1):
-            process_request(request['request'], environment_variables, index)
+            process_request(request, environment_variables, index)
 
         print("Requests processed and Python scripts generated in the 'requests' folder.")
 
